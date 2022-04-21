@@ -64,7 +64,8 @@
             "key": "mobile_no",
             "label": "Mobile number",
             "type": "Number",
-            "maxLength": "10"
+            "min": "0",
+            "max": "9999999999"
         },
         {
             "key": "email",
@@ -72,7 +73,7 @@
             "type": "email"
         }
     ]
-    let obj = JSON.parse(JSON.stringify(validations))
+    let arr = JSON.parse(JSON.stringify(validations))
 
     let container = document.getElementById("container")
     let form = document.createElement("form");
@@ -81,11 +82,13 @@
 
         //mapping form elements
 
-        obj.map((e) => {
+        arr.map((e) => {
             let label1 = document.createElement("label")
             label1.innerText = e.label
             let input1 = document.createElement("input")
             input1.setAttribute("required", "required")
+
+            //assigning id to every input field
             input1.id = e.key
 
             //setting attributes dynamically
@@ -117,8 +120,8 @@
 
     /*
         Function to check if the number is 10 digits or not because input type number doesnt support maxLength by design.
-        As it is a numberic value it is not taking length in consideration.
-        So our form validation fails when we enter a wrong mobile number to handle that exception we used this.
+        As it is a numberic value it is not taking length into consideration.
+        So our form validation fails when we enter a wrong mobile number to handle that exception we used check()
     */
 
     function check(){
