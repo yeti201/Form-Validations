@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+#submit {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+#submit:hover {
+  background-color: #45a049;
+}
+
+#container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 30%;
+  margin: auto;
+}
+</style>
+</head>
+<body>
+
+
+
+<div id="container">
+  <h2>WIFY JSON form validation</h2>
+</div>
+
+</body>
+</html>
+
+<script>
+let validations = [
+                    {
+                        "key": "user_name",
+                        "label": "Name",
+                        "type": "text",
+                        "maxLength": "30"
+                    },
+                    {
+                        "key": "mobile_no",
+                        "label": "Mobile number",
+                        "type": "number",
+                        "maxLength": "10"
+                    },
+                    {
+                        "key": "email",
+                        "label": "Email",
+                        "type": "email"
+                    }
+                ]
+let obj = JSON.parse(JSON.stringify( validations ) )
+
+let container = document.getElementById("container")
+
+    function createForm(){
+        let form = document.createElement("form")
+
+
+        let label1 = document.createElement("label")
+        label1.innerText = "Name"
+        let input1 = document.createElement("input")
+        input1.id = "username"
+        input1.setAttribute("placeholder", "Username")
+        input1.setAttribute("type", obj[0].type)
+        input1.setAttribute("maxLength", obj[0].maxLength)
+        input1.setAttribute("required", "required")
+
+        let label2 = document.createElement("label")
+        label2.innerText = "Mobile_No" 
+        let input2 = document.createElement("input")
+        input2.id = "phoneNo";
+        input2.setAttribute("placeholder", "Mobile Number")
+        input2.setAttribute("type", obj[1].type)
+        input2.setAttribute("maxLength", obj[1].maxLength)
+        input2.setAttribute("required", "required")
+
+        let label3 = document.createElement("label")
+        label3.innerText = "Email"
+        let input3 = document.createElement("input")
+        input3.id = "email"
+        input3.setAttribute("placeholder", "Email")
+        input3.setAttribute("type", obj[2].type)
+        input3.setAttribute("required", "required")
+
+        let submit = document.createElement("input")
+        submit.setAttribute("id", "submit")
+        submit.setAttribute("type", "Submit")
+
+        form.addEventListener("submit",(e)=>{
+            e.preventDefault()
+            check()
+        })
+
+        form.append(label1,input1,label2,input2,label3,input3,submit)
+
+        container.append(form)
+    }
+
+    createForm();
+
+    function check(){
+        let username = document.getElementById("username").value
+        let number = document.getElementById("phoneNo").value
+        let email = document.getElementById("email").value
+        if(number.length !==10){
+            alert("Invalid Phone Number")
+        }else{
+            console.log("Name: ", username, "\n", "Mobile No: ", number, "\n", "Email: ", email)
+            alert("Submitted Successfully")
+        }
+        
+    }
+
+    
+    
+</script>
